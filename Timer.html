@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Gesamtzeit Countdown</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 20%;
+      font-size: 2em;
+    }
+    #timer div {
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1></h1>
+  <div id="timer">
+    <div id="totalHours"></div>
+    <div id="totalMinutes"></div>
+  </div>
+
+  <script>
+    function updateTimer() {
+      const endTime = new Date("2025-08-12T09:00:00+02:00"); // MESZ
+      const now = new Date();
+      const diff = endTime - now;
+
+      if (diff <= 0) {
+        document.getElementById("totalHours").innerHTML = "0 Stunden";
+        document.getElementById("totalMinutes").innerHTML = "0 Minuten";
+        clearInterval(timerInterval);
+        return;
+      }
+
+      const totalMinutes = Math.floor(diff / (1000 * 60));
+      const totalHours = Math.floor(diff / (1000 * 60 * 60));
+
+      document.getElementById("totalHours").innerHTML = `${totalHours} Stunden`;
+      document.getElementById("totalMinutes").innerHTML = `${totalMinutes} Minuten`;
+    }
+
+    updateTimer();
+    const timerInterval = setInterval(updateTimer, 60000); // jede Minute aktualisieren
+  </script>
+</body>
+</html>
+
+
